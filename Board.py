@@ -31,49 +31,126 @@ class Board:
         print(array)
 
 
+    # Give resources to each person for the first phase of each turn
+    def GiveResources(sum_of_dice):
+        x = -1
+        y = -1
+        resource = None
+
+        # Check which tiles are giving away resources
+        # Loop through array of arrays (list of lists)
+        for column in array:
+            for tile in column:
+                # Make sure tile is not a unused/null tile
+                if tile != None
+                    # Assign values if the probability matches the dice roll
+                    if tile.probability == sum_of_dice:
+                        x = tile.x
+                        y = tile.y
+                        resource = tile.resource
+                        # Don't give any resources from this tile if the tile has a robber on it
+                        if tile.robber == True:
+                            print("Oh no! The tile at (", x, ",", y, ") which gives", resource, "has a robber on it!")
+                            continue
+                        # Otherwise find which players have a settlement or city on a corner of this tile.
+                        player_list = []
+                        player_list = FindSettlementsOnTile(tile)
+
+    def FindSettlementsOnTile(board_tile):
+        if board_tile.N != None:
+            
+
+
     # Function to check if a Board Piece exists at Board Tile edge
     def IsBoardPiece(self, x, y, direction):
         if direction == "N":
-            if self.array[y][x].N != None:
+            if self.array[y][x].corner_N != None:
                 return False
         if direction == "NE":
-            if self.array[y][x].NE != None:
+            if self.array[y][x].corner_NE != None:
                 return False
         if direction == "NW":
-            if self.array[y][x].NW != None:
+            if self.array[y][x].corner_NW != None:
                 return False
         if direction == "S":
-            if self.array[y][x].S != None:
+            if self.array[y][x].corner_S != None:
                 return False
         if direction == "SE":
-            if self.array[y][x].SE != None:
+            if self.array[y][x].corner_SE != None:
                 return False
         if direction == "SW":
-            if self.array[y][x].SW != None:
+            if self.array[y][x].corner_SW != None:
                 return False
+
 
     # Function to set Settlement at corner
-    def SetSettlement(self, x, y, direction):
+    # First line sets the piece at the current location
+    # 2nd and 3rd line set the piece for the adjacent hexes,
+    # since this is weird setup for the game board, and needs to be redundant.
+    def SetSettlement(self, x, y, direction, color):
         if direction == "N":
-            array[y][x].N == BoardPiece(x, y, direction, "Settlement")
+            array[y][x].corner_N == BoardPiece(x, y, direction, color, "Settlement")
+            array[y-1][x].corner_SE == BoardPiece(x, y, direction, color, "Settlement")
+            array[y-1][x+1].corner_SW == BoardPiece(x, y, direction, color, "Settlement")
         if direction == "NE":
-            array[y][x].NE == BoardPiece(x, y, direction, "Settlement")
+            array[y][x].corner_NE == BoardPiece(x, y, direction, color, "Settlement")
+            array[y-1][x+1].corner_S == BoardPiece(x, y, direction, color, "Settlement")
+            array[y][x+1].corner_NW == BoardPiece(x, y, direction, color, "Settlement")
         if direction == "NW":
-            array[y][x].NW == BoardPiece(x, y, direction, "Settlement")
+            array[y][x].corner_NW == BoardPiece(x, y, direction, color, "Settlement")
+            array[y][x-1].corner_NE == BoardPiece(x, y, direction, color, "Settlement")
+            array[y-1][x].corner_S == BoardPiece(x, y, direction, color, "Settlement")
         if direction == "S":
-            array[y][x].S == BoardPiece(x, y, direction, "Settlement")
+            array[y][x].corner_S == BoardPiece(x, y, direction, color, "Settlement")
+            array[y+1][x].corner_NW == BoardPiece(x, y, direction, color, "Settlement")
+            array[y+1][x-1].corner_NE == BoardPiece(x, y, direction, color, "Settlement")
         if direction == "SE":
-            array[y][x].SE == BoardPiece(x, y, direction, "Settlement")
+            array[y][x].corner_SE == BoardPiece(x, y, direction, color, "Settlement")
+            array[y][x+1].corner_SW == BoardPiece(x, y, direction, color, "Settlement")
+            array[y+1][x].corner_N == BoardPiece(x, y, direction, color, "Settlement")
         if direction == "SW":
-            array[y][x].SW == BoardPiece(x, y, direction, "Settlement")
+            array[y][x].corner_SW == BoardPiece(x, y, direction, color, "Settlement")
+            array[y+1][x-1].corner_N == BoardPiece(x, y, direction, color, "Settlement")
+            array[y][x-1].corner_SE == BoardPiece(x, y, direction, color, "Settlement")
 
-    def PlaceBoardPiece(self, x, y, direction, board_piece):
+
+    # Function to set Road at edge
+    # First line sets the piece at the current location
+    # 2nd line sets the piece for the adjacent hex,
+    # since this is weird setup for the game board.
+    def SetRoad(self, x, y, direction, color):
+        if direction == "NE":
+            array[y][x].edge_NE == BoardPiece(x, y, direction, color, "Road")
+            array[y-1][x+1].edge_SW == BoardPiece(x, y, direction, color, "Road")
+        if direction == "E":
+            array[y][x].edge_E == BoardPiece(x, y, direction, color, "Road")
+            array[y][x+1].edge_W == BoardPiece(x, y, direction, color, "Road")
+        if direction == "SE":
+            array[y][x].edge_SE == BoardPiece(x, y, direction, color, "Road")
+            array[y+1][x].edge_NW == BoardPiece(x, y, direction, color, "Road")
+        if direction == "SW":
+            array[y][x].edge_SW == BoardPiece(x, y, direction, color, "Road")
+            array[y+1][x-1].edge_NE == BoardPiece(x, y, direction, color, "Road")
+        if direction == "W":
+            array[y][x].edge_W == BoardPiece(x, y, direction, color, "Road")
+            array[y][x-1].edge_E == BoardPiece(x, y, direction, color, "Road")
+        if direction == "NW":
+            array[y][x].edge_NW == BoardPiece(x, y, direction, color, "Road")
+            array[y-1][x].edge_SE == BoardPiece(x, y, direction, color, "Road")
+
+
+    def PlaceBoardPiece(self, x, y, direction, board_piece, color):
         if !IsBoardPiece(x, y, direction):
             if board_piece == "Settlement":
-                self.SetSettlement(x, y, direction)
-                return True
+                if array[y][x].IsSettlementPlaceable(direction, color):
+                    self.SetSettlement(x, y, direction, color)
+                return True # why do I return true here
             elif board_piece == "City":
-                self.SetCity(x, y, direction)
+                if array[y][x].IsSettlement(direction, color)
+                self.SetCity(x, y, direction, color)
+            elif board_piece == "Road":
+
+                self.SetRoad(x, y, direction, color)
         else:
             print("There is already a piece there.")
             return False

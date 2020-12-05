@@ -29,15 +29,30 @@ def main():
     # Create loops for turns
     while(!gameover):
         turn = turn + 1
-        # The oldest player goes first
+
+        # Phase 1: Resource Production
+        sum_of_dice = dice(2) # Roll 2 dice and get their sum.
+        Board.GiveResources(sum_of_dice)
+
+        # Phase 2: Trade
+        # Phase 3: Build
+        # The oldest player goes first during players phase
         for player in Players[]:
             player.my_turn = True
             # Place 2 settlements and roads to start off the game
             if turn == 1 or turn == 2
-                piece_placed = False
-                while(!piece_placed):
+                settlement_placed = False
+                while(!settlement_placed):
                     print(player.name, "is placing a Settlement.")
-                    piece_placed = Board.PlaceBoardPiece(3,3,"N","Settlement")
+                    settlement_placed = Board.PlaceBoardPiece(3,3,"N","Settlement", player.color)
+                road_placed = False
+                while(!road_placed):
+                    print(player.name, "is placing a Road.")
+                    road_placed = Board.PlaceBoardPiece(3,3,"N","Road", player.color)
+
+
+def dice(n):
+    return sum(random.randint(1, 6) for _ in range(n))
 
 
 if __name__ == "__main__":
