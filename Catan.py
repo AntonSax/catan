@@ -32,9 +32,16 @@ def main():
 
         # Phase 1: Resource Production
         sum_of_dice = dice(2) # Roll 2 dice and get their sum.
-        Board.GiveResources(sum_of_dice)
+        Board.GiveResources(sum_of_dice, Players)
 
         # Phase 2: Trade
+        for player in Players[]:
+            # TODO: Domestic Trade - probably very difficult to do
+            #
+            # TODO: Maritime Trade
+            #
+
+
         # Phase 3: Build
         # The oldest player goes first during players phase
         for player in Players[]:

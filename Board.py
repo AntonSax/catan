@@ -32,7 +32,7 @@ class Board:
 
 
     # Give resources to each person for the first phase of each turn
-    def GiveResources(sum_of_dice):
+    def GiveResources(sum_of_dice, list_of_players):
         x = -1
         y = -1
         resource = None
@@ -53,12 +53,22 @@ class Board:
                             print("Oh no! The tile at (", x, ",", y, ") which gives", resource, "has a robber on it!")
                             continue
                         # Otherwise find which players have a settlement or city on a corner of this tile.
-                        player_list = []
-                        player_list = FindSettlementsOnTile(tile)
-
-    def FindSettlementsOnTile(board_tile):
-        if board_tile.N != None:
-            
+                        player_color_dict = dict()
+                        player_color_dict = tile.FindSettlementsOnTile()
+                        # TODO: Add code for this case in the rules:
+                        # If there are not enough of a given resource in the supply
+                        # to fulfill everyone's production, then no one receives any
+                        # of that resource during that turn (unless it only affects 1 player).
+                        #
+                        #
+                        # Match the players with their colors to see if they get resources
+                        for player in list_of_players:
+                            for color, resource_quantity in player_color_dict.items():
+                                if player.color == color:
+                                    # Decrement from the available resources
+                                    resource_cards_left[resource] -= resource_quantity
+                                    # Increment what resources each players has
+                                    player.resources[resource] += resource_quantity
 
 
     # Function to check if a Board Piece exists at Board Tile edge

@@ -8,8 +8,9 @@ class BoardTile:
         self.x = j
         self.y = i
         self.z = None # maybe not used
-        # Corner of the hexes
+        # Corners of the hexes
         # Will be replaced with the BoardPiece object
+        # Make these into a dictionary
         self.corner_N = None
         self.corner_NE = None
         self.corner_NW = None
@@ -38,3 +39,45 @@ class BoardTile:
 
 
     def IsSettlement(self, direction, color):
+        print("TODO")
+
+    # Returns a dictionary of players who get this resource
+    # the key is the player
+    # the value is how much of this resource they get
+    def FindSettlementsOnTile():
+        player_color_dict = dict()
+        if corner_N != None:
+            if corner_N.piece == "Settlement":
+                # Add 1 to value, don't set value to 1,
+                # as player may have multiple settlements on this tile
+                player_color_dict[corner_N.color] = player_color_dict[corner_N.color] + 1
+            elif corner_N.piece == "City":
+                # Add 2 to value, don't set value to 2,
+                # as player may have multiple settlements on this tile
+                player_color_dict[corner_N.color] = player_color_dict[corner_N.color] + 2
+        if corner_NE != None:
+            if corner_NE.piece == "Settlement":
+                player_color_dict[corner_NE.color] = player_color_dict[corner_NE.color] + 1
+            elif corner_NE.piece == "City":
+                player_color_dict[corner_NE.color] = player_color_dict[corner_NE.color] + 2
+        if corner_NW != None:
+            if corner_NW.piece == "Settlement":
+                player_color_dict[corner_NW.color] = player_color_dict[corner_NW.color] + 1
+            elif corner_NW.piece == "City":
+                player_color_dict[corner_NW.color] = player_color_dict[corner_NW.color] + 2
+        if corner_S != None:
+            if corner_S.piece == "Settlement":
+                player_color_dict[corner_S.color] = player_color_dict[corner_S.color] + 1
+            elif corner_S.piece == "City":
+                player_color_dict[corner_S.color] = player_color_dict[corner_S.color] + 2
+        if corner_SE != None:
+            if corner_SE.piece == "Settlement":
+                player_color_dict[corner_SE.color] = player_color_dict[corner_SE.color] + 1
+            elif corner_SE.piece == "City":
+                player_color_dict[corner_SE.color] = player_color_dict[corner_SE.color] + 2
+        if corner_SW != None:
+            if corner_SW.piece == "Settlement":
+                player_color_dict[corner_SW.color] = player_color_dict[corner_SW.color] + 1
+            elif corner_SW.piece == "City":
+                player_color_dict[corner_SW.color] = player_color_dict[corner_SW.color] + 2
+        return player_color_dict

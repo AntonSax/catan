@@ -7,7 +7,7 @@ class Player:
         self.age = age
         self.color = color
         self.my_turn = False
-        self.resources = {Lumber:0,Grain:0,Wool:0,Brick:0,Ore:0}
+        self.resources = {"Lumber":0,"Grain":0,"Wool":0,"Brick":0,"Ore":0}
         self.settlements = 0    # max=5
         self.cities = 0         # max=4
         self.roads = 0          # max=15
