@@ -36,10 +36,18 @@ def main():
 
         # Phase 2: Trade
         for player in Players[]:
-            # TODO: Domestic Trade - probably very difficult to do
+            # TODO: Domestic Trade
             #
             # TODO: Maritime Trade
+            # Maritime trade should happen at the same time as domestic
+            # Check if the player has any port cities
             #
+            # Check if the player has enough cards to make any trades
+            #        e.g. a 3:1 Generic Harbor,
+            #             a 2:1 Special Harbor (one for each resource),
+            #          or a 4:1 No Harbor trade
+            #
+            # Then give them an option for which trade to choose from
 
 
         # Phase 3: Build
