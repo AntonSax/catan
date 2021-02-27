@@ -1,6 +1,7 @@
 import socket
 from _thread import *
-from player import Player
+from player_test import Square
+#from Player import Player
 import pickle
 
 server = "192.168.1.151"
@@ -17,7 +18,7 @@ s.listen(2)
 print("Waiting for a connection, Server Started")
 
 
-players = [Player(0,0,50,50,(255,0,0)), Player(100,100,50,50,(0,0,255))]
+players = [Square(0,0,50,50,(255,0,0)), Square(100,100,50,50,(0,0,255))]
 
 def threaded_client(conn, player):
     conn.send(pickle.dumps(players[player]))

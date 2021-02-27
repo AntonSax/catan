@@ -1,9 +1,10 @@
-import Board.py
-import Player.py
+from Board import Board
+import Player
 
 def main():
     players = 0
     expansion = None
+    board = None
 
     print("Some questions before you start:")
     print("How many players are playing?")
@@ -19,15 +20,16 @@ def main():
     expansion = input()
 
     # Create board and players
-    Board = Board(players, expansion)
+    board = Board(players) # Board(players, expansion) add expansion parameter
     Players = [Player() for i in range(players)]
     # Sort the players by age to easily make oldest player go first
     Players.sort(key=lambda x: x.age, reverse=True)
 
     # Turn counter
     turn = 0
+    gamover = False
     # Create loops for turns
-    while(!gameover):
+    while not (gameover):
         turn = turn + 1
 
         # Phase 1: Resource Production
@@ -35,7 +37,7 @@ def main():
         Board.GiveResources(sum_of_dice, Players)
 
         # Phase 2: Trade
-        for player in Players[]:
+        for player in Players:
             # TODO: Domestic Trade
             #
             # TODO: Maritime Trade
@@ -48,20 +50,20 @@ def main():
             #          or a 4:1 No Harbor trade
             #
             # Then give them an option for which trade to choose from
-
+            print("TODO")
 
         # Phase 3: Build
         # The oldest player goes first during players phase
-        for player in Players[]:
+        for player in Players:
             player.my_turn = True
             # Place 2 settlements and roads to start off the game
-            if turn == 1 or turn == 2
+            if turn == 1 or turn == 2:
                 settlement_placed = False
-                while(!settlement_placed):
+                while not (settlement_placed):
                     print(player.name, "is placing a Settlement.")
                     settlement_placed = Board.PlaceBoardPiece(3,3,"N","Settlement", player.color)
                 road_placed = False
-                while(!road_placed):
+                while not (road_placed):
                     print(player.name, "is placing a Road.")
                     road_placed = Board.PlaceBoardPiece(3,3,"N","Road", player.color)
 

@@ -1,17 +1,21 @@
 # Using a pointy-edge up style
+import random
+
 import BoardTile
 
 
 class Board:
 
-    board_diameter = 5
-
-    def __init__(self, players):
+    def __init__(self, players): # need to add a parameter for expansion
         self.resource_cards_left = {"Lumber":19,"Grain":19,"Wool":19,"Brick":19,"Ore":19}
                                   #{Forest:4,Fields:4,Pasture:4,Hills:3,Mountains:3,Desert:1}
         self.resource_tiles_left = {"Lumber":4,"Grain":4,"Wool":4,"Brick":3,"Ore":3,"Nothing":1}
         self.probability_tiles_left = {2:1,3:2,4:2,5:2,6:2,8:2,9:2,10:2,11:2,12:1}
         self.array = []
+
+
+        board_diameter = 5
+
         for i in range(board_diameter):
             col = []
             for j in range (board_diameter):
@@ -23,9 +27,9 @@ class Board:
                 # Remove that resource tile and probability tile from useable pieces.
                 resource_tiles_left[resource_tile] = resource_tiles_left[resource_tile] - 1
                 probability_tiles_left[probability_tile] = probability_tiles_left[probability_tile] - 1
-                if resource_tiles_left[resource_tile] = 0:
+                if resource_tiles_left[resource_tile] == 0:
                     del resource_tiles_left[resource_tile]
-                if probability_tiles_left[probability_tile] = 0:
+                if probability_tiles_left[probability_tile] == 0:
                     del probability_tiles_left[probability_tile]
             array.append(col)
         print(array)
@@ -42,7 +46,7 @@ class Board:
         for column in array:
             for tile in column:
                 # Make sure tile is not a unused/null tile
-                if tile != None
+                if tile != None:
                     # Assign values if the probability matches the dice roll
                     if tile.probability == sum_of_dice:
                         x = tile.x
@@ -150,14 +154,14 @@ class Board:
 
 
     def PlaceBoardPiece(self, x, y, direction, board_piece, color):
-        if !IsBoardPiece(x, y, direction):
+        if not (IsBoardPiece(x, y, direction)):
             if board_piece == "Settlement":
                 if array[y][x].IsSettlementPlaceable(direction, color):
                     self.SetSettlement(x, y, direction, color)
                 return True # why do I return true here
             elif board_piece == "City":
-                if array[y][x].IsSettlement(direction, color)
-                self.SetCity(x, y, direction, color)
+                if array[y][x].IsSettlement(direction, color):
+                    self.SetCity(x, y, direction, color)
             elif board_piece == "Road":
 
                 self.SetRoad(x, y, direction, color)

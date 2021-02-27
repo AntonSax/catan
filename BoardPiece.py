@@ -15,5 +15,8 @@ class BoardPiece:
         self.trade_ratio_to_one = None
 
     def CheckIfPort():
+        print("Is this a port")
+        print("No idea")
 
     def SetResource():
+        print("Setting resources.")
