@@ -45,6 +45,34 @@ class Player:
 
     # Domestic Trade is trading with the other players
     def DomesticTrade(self):
+        print("What resource are you seeking?")
+        for key, value in self.resources:
+            print(key, ": ", "You have ", value, " currently.")
+        resource_wanted = input()
+        resource_wanted = resource_wanted.title()
+
+        # Send this to the non-current players
+        print("Current player is seeking a ", resource_wanted)
+        print("Make an offer? (Y/N)")
+        making_offer = input().title()
+        if making_offer == "Y":
+            print("Enter which resource you want and how much.")
+            offer = input()
+            offer_resource = filter(str.isalpha(), offer)
+            offer_amount = filter(str.isdigit(), offer)
+
+        # Send to all players
+        if offer_amount > 0:
+            # Realistically needs to print all player offers
+            print("Non-current player will take ", offer_amount, " ", offer_resource, "s for the ", resource_wanted)
+
+        # Asking current player again
+        print("Take offer? (Y/N)")
+        complete_deal = input()
+        if complete_deal == "Y":
+            print("Deal completed")
+            # swap cards
+
 
     # Maritime Trade is trading with nobody/the bank.
     def MaritimeTrade(self):
@@ -59,7 +87,7 @@ class Player:
         print("Select what resource you will give up for it (Input resource name): ")
         # List what cards you can trade for, and how much you have of that card.
         for key, value in self.resources:
-            print(self.resources.keys().index(key)+1, ".", key, ": ", "You have ", value, " currently.")
+            print(key, ": ", "You have ", value, " currently.")
         resource_given = input()
         resource_given = resource_given.title()
 
