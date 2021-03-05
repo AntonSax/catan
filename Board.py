@@ -1,7 +1,7 @@
 # Using a pointy-edge up style
 import random
 
-import BoardTile
+from BoardTile import BoardTile
 
 
 class Board:
@@ -10,28 +10,33 @@ class Board:
         self.resource_cards_left = {"Lumber":19,"Grain":19,"Wool":19,"Brick":19,"Ore":19}
                                   #{Forest:4,Fields:4,Pasture:4,Hills:3,Mountains:3,Desert:1}
         self.resource_tiles_left = {"Lumber":4,"Grain":4,"Wool":4,"Brick":3,"Ore":3,"Nothing":1}
-        self.probability_tiles_left = {2:1,3:2,4:2,5:2,6:2,8:2,9:2,10:2,11:2,12:1}
+        self.probability_tiles_left = {2:1,3:2,4:2,5:2,6:2,7:1,8:2,9:2,10:2,11:2,12:1}
         self.array = []
 
 
         board_diameter = 5
+        total_tiles = 19
 
         for i in range(board_diameter):
             col = []
             for j in range (board_diameter):
+                # Set null values on the board spaces we don't want to use.
+                if (i + j < 3) or (i + j > 8):
+                    col.append(None)
                 # Grab a resource tile and probability tile for board creation.
                 resource_tile = random.choice(list(self.resource_tiles_left))
+                print("Probability tiles left: ", list(self.probability_tiles_left))
                 probability_tile = random.choice(list(self.probability_tiles_left))
                 # Append a BoardTile to the board.
-                col.append(BoardTile(i, j, resource=resource_tile, probability=probability_tile))                           # BUG: will currently fill null hexes with tiles
+                col.append(BoardTile(i, j, resource=resource_tile, probability=probability_tile))                           # BUG: will currently fill null hexes with tiles?
                 # Remove that resource tile and probability tile from useable pieces.
-                resource_tiles_left[resource_tile] = resource_tiles_left[resource_tile] - 1
-                probability_tiles_left[probability_tile] = probability_tiles_left[probability_tile] - 1
-                if resource_tiles_left[resource_tile] == 0:
-                    del resource_tiles_left[resource_tile]
-                if probability_tiles_left[probability_tile] == 0:
-                    del probability_tiles_left[probability_tile]
-            array.append(col)
+                self.resource_tiles_left[resource_tile] = self.resource_tiles_left[resource_tile] - 1
+                self.probability_tiles_left[probability_tile] = self.probability_tiles_left[probability_tile] - 1
+                if self.resource_tiles_left[resource_tile] == 0:
+                    del self.resource_tiles_left[resource_tile]
+                if self.probability_tiles_left[probability_tile] == 0:
+                    del self.probability_tiles_left[probability_tile]
+            self.array.append(col)
         print(array)
 
 
