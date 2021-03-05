@@ -14,8 +14,8 @@ class Player:
         self.roads = 0          # max=15
         self.development_cards = 0
         self.knight_cards = 0
-        self.has_longest_road = false
-        self.has_largest_army = false
+        self.has_longest_road = False
+        self.has_largest_army = False
         self.victory_points = 0 # cities & settlements count towards victory points
 
 
